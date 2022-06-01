@@ -1,0 +1,92 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  position: relative;
+  font-family: "Montserrat", sans-serif;
+  background-color: black;
+  color: #9e9999;
+  font-size: 1.2rem;
+}
+
+.wrapper {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.about_me {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100vh;
+}
+
+.about_me-photo, .about_me-shadow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.about_me-photo {
+  background-image: url(../img/me.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-filter: grayscale(1);
+          filter: grayscale(1);
+}
+
+.about_me-shadow {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.about_me-text {
+  width: 100%;
+  position: absolute;
+  top: 70%;
+  text-align: center;
+  padding: 0 2em;
+  font-size: 1.8rem;
+}
+
+.about_me-text-span {
+  color: #96a6d6;
+  font-weight: bold;
+}
+
+@media (min-width: 576px) {
+  .about_me-photo {
+    background-position-y: 2px;
+  }
+  .about_me-text {
+    top: 80%;
+  }
+}
+
+@media (min-width: 768px) {
+  .about_me {
+    height: 70vh;
+    padding-left: 5em;
+  }
+  .about_me-photo {
+    width: 70%;
+  }
+  .about_me-text {
+    left: 55%;
+    width: 50%;
+    padding-right: 5em;
+  }
+}
+/*# sourceMappingURL=style.css.map */

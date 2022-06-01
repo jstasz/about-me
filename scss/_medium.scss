@@ -1,0 +1,16 @@
+@media (min-width: 768px) {
+	.about_me {
+		height: 70vh;
+		padding-left: 5em;
+
+		&-photo {
+			width: 70%;
+		}
+
+		&-text {
+			left: 55%;
+			width: 50%;
+			padding-right: 5em;
+		}
+	}
+}

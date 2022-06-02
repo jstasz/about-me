@@ -1,13 +1,13 @@
 @media (min-width: 768px) {
-	.about_me {
+	.about-me {
 		height: 70vh;
 		padding-left: 5em;
 
-		&-photo {
+		&__photo {
 			width: 70%;
 		}
 
-		&-text {
+		&__text {
 			left: 55%;
 			width: 50%;
 			padding-right: 5em;

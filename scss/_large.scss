@@ -1,1 +1,7 @@
-// @media (min-width: 992px) {}
+@media (min-width: 992px) {
+	.about-me {
+		&__text {
+			font-size: 2rem;
+		}
+	}
+}

@@ -28,19 +28,19 @@ body {
 
 //header
 
-.about_me {
+.about-me {
 	position: relative;
 	display: flex;
 	height: 100vh;
 
-	&-photo,
-	&-shadow {
+	&__photo,
+	&__shadow {
 		position: absolute;
 		width: 100%;
 		height: 100%;
 	}
 
-	&-photo {
+	&__photo {
 		background-image: url(../img/me.jpg);
 		background-size: cover;
 		background-repeat: no-repeat;
@@ -48,11 +48,11 @@ body {
 		filter: grayscale(1);
 	}
 
-	&-shadow {
+	&__shadow {
 		background-color: rgba(0, 0, 0, 0.3);
 	}
 
-	&-text {
+	&__text {
 		width: 100%;
 		position: absolute;
 		top: 70%;
@@ -60,9 +60,43 @@ body {
 		padding: 0 2em;
 		font-size: 1.8rem;
 
-		&-span {
-			color: $main;
+		&--span {
+			color: $main-dark;
 			font-weight: bold;
+		}
+	}
+}
+
+// nav
+
+.nav {
+	width: 100%;
+	max-width: 1600px;
+	margin: 0 auto;
+
+	&-mobile {
+		display: none;
+	}
+
+	&-desktop {
+		display: flex;
+		justify-content: flex-end;
+		text-decoration: none;
+		color: white;
+	}
+
+	&__link {
+		position: relative;
+		margin: 1em;
+		padding: 0.5em;
+		font-size: 2rem;
+		color: white;
+		text-decoration: none;
+		text-transform: uppercase;
+		transition: color 0.3s;
+
+		&:hover {
+			color: $main-light;
 		}
 	}
 }

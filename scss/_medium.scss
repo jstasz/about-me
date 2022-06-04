@@ -5,9 +5,11 @@
 
 		&__photo {
 			width: 70%;
+			background-position-y: -50px;
 		}
 
 		&__text {
+			top: 60%;
 			left: 55%;
 			width: 50%;
 			padding-right: 5em;

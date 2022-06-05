@@ -71,6 +71,7 @@ body {
   width: 100%;
   max-width: 1600px;
   margin: 1em auto;
+  padding: 1em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -89,28 +90,39 @@ body {
 .nav-desktop {
   text-decoration: none;
   color: white;
+  display: none;
+}
+
+.nav__link, .nav__logo-img {
+  padding: 0.5em;
+  color: white;
+  text-decoration: none;
+}
+
+.nav__link--big, .nav__logo-img--big {
+  display: none;
 }
 
 .nav__link {
-  position: relative;
-  margin: 1em;
-  padding: 0.2em;
-  font-size: 2rem;
-  color: white;
-  text-decoration: none;
   text-transform: uppercase;
   -webkit-transition: color 0.3s;
   transition: color 0.3s;
+  font-size: 1.5rem;
 }
 
 .nav__link:hover {
   color: #c690f6;
 }
 
+.nav__logo {
+  text-decoration: none;
+}
+
 .nav__logo-img {
-  display: block;
-  height: 100%;
-  margin: 2em;
+  color: #c690f6;
+  font-family: "Mrs Saint Delafield", cursive;
+  font-size: 2rem;
+  letter-spacing: 0.1em;
 }
 
 @media (min-width: 576px) {
@@ -134,11 +146,20 @@ body {
     width: 50%;
     padding-right: 5em;
   }
+  .nav-desktop {
+    display: block;
+  }
 }
 
 @media (min-width: 992px) {
   .about-me__text {
     font-size: 2rem;
+  }
+  .nav__link {
+    font-size: 2rem;
+  }
+  .nav__logo-img {
+    font-size: 3.5rem;
   }
 }
 /*# sourceMappingURL=style.css.map */

@@ -75,6 +75,7 @@ body {
 		width: 100%;
 		max-width: 1600px;
 		margin: 1em auto;
+		padding: 1em;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -87,17 +88,24 @@ body {
 	&-desktop {
 		text-decoration: none;
 		color: white;
+		display: none;
+	}
+
+	&__link,
+	&__logo-img {
+		padding: 0.5em;
+		color: white;
+		text-decoration: none;
+
+		&--big {
+			display: none;
+		}
 	}
 
 	&__link {
-		position: relative;
-		margin: 1em;
-		padding: 0.2em;
-		font-size: 2rem;
-		color: white;
-		text-decoration: none;
 		text-transform: uppercase;
 		transition: color 0.3s;
+		font-size: 1.5rem;
 
 		&:hover {
 			color: $main-light;
@@ -105,10 +113,13 @@ body {
 	}
 
 	&__logo {
+		text-decoration: none;
+
 		&-img {
-			display: block;
-			height: 100%;
-			margin: 2em;
+			color: $main-light;
+			font-family: "Mrs Saint Delafield", cursive;
+			font-size: 2rem;
+			letter-spacing: 0.1em;
 		}
 	}
 }

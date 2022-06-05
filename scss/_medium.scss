@@ -15,4 +15,10 @@
 			padding-right: 5em;
 		}
 	}
+
+	.nav {
+		&-desktop {
+			display: block;
+		}
+	}
 }

@@ -10,17 +10,12 @@ const handleHover = function (e) {
 		const siblings = clickedLink
 			.closest(".nav__container")
 			.querySelectorAll(".nav__link");
-		const logo = clickedLink
-			.closest(".nav__container")
-			.querySelector(".nav__logo-img");
 
 		siblings.forEach((el) => {
 			if (el !== clickedLink) el.style.opacity = this;
 		});
-
-		logo.style.opacity = this;
 	}
 };
 
-nav.addEventListener("mouseover", handleHover.bind(0.5));
+nav.addEventListener("mouseover", handleHover.bind(0.3));
 nav.addEventListener("mouseout", handleHover.bind(1));

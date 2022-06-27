@@ -103,12 +103,11 @@ body {
 
 	&__link {
 		text-transform: uppercase;
-		transition: color 0.3s;
 		font-size: 1.5rem;
-		color: white;
+		color: $grey;
 
 		&:hover {
-			color: $main-light;
+			color: $main-dark;
 		}
 	}
 

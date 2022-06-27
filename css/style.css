@@ -104,14 +104,12 @@ body {
 
 .nav__link {
   text-transform: uppercase;
-  -webkit-transition: color 0.3s;
-  transition: color 0.3s;
   font-size: 1.5rem;
-  color: white;
+  color: #9e9999;
 }
 
 .nav__link:hover {
-  color: #c690f6;
+  color: #d3b1f1;
 }
 
 .nav__logo {

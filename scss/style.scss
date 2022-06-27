@@ -94,7 +94,6 @@ body {
 	&__link,
 	&__logo-img {
 		padding: 0.5em;
-		color: white;
 		text-decoration: none;
 
 		&--big {
@@ -106,6 +105,7 @@ body {
 		text-transform: uppercase;
 		transition: color 0.3s;
 		font-size: 1.5rem;
+		color: white;
 
 		&:hover {
 			color: $main-light;

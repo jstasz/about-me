@@ -1,13 +1,15 @@
 # restaurants-app
 
-To do: 
-html and css 
-add map 
-render place
-list of place
-add mark
-sort results
-local storage
+### To do: <br>
+<ul>
+* html and css <br>
+* add map leaflets<br>%
+* render places <br>
+* list of places <br>
+* add mark <br>
+* sort results <br>
+* local storage <br>
+</ul>
 
 
 

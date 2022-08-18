@@ -12,9 +12,9 @@ html {
 
 body {
 	font-family: "Montserrat", sans-serif;
-	font-size: 1.2rem;
-	background-color: rgb(155, 154, 154);
-	margin: 1em;
+	font-size: 1.4rem;
+	background-color: rgb(111, 111, 111);
+	margin: 0 1em;
 }
 
 .wrapper {
@@ -27,8 +27,40 @@ body {
 	display: none;
 }
 
-.main {
-	&__box {
+.container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	// height: 100vh;
+}
+
+.box {
+	padding: 1em;
+	background-image: radial-gradient(
+		circle,
+		rgb(93, 93, 93) 0%,
+		rgb(77, 77, 77) 50%,
+		rgb(44, 44, 44) 100%
+	);
+	box-shadow: 8px 8px 24px 0px rgba(91, 91, 91, 1);
+	border-radius: 10px;
+	overflow: hidden;
+	margin: 1em;
+}
+
+.add-restaurant {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100vh;
+
+	&__title {
 		color: rgb(208, 207, 207);
 		position: relative;
 		display: flex;
@@ -36,26 +68,55 @@ body {
 		justify-content: center;
 		align-items: center;
 		width: 100%;
-		height: 20vh;
+		height: 20%;
 		text-align: center;
-		padding: 1em;
-		background-image: radial-gradient(
-			circle,
-			rgb(93, 93, 93) 0%,
-			rgb(77, 77, 77) 50%,
-			rgb(44, 44, 44) 100%
-		);
-		box-shadow: 8px 8px 24px 0px rgba(91, 91, 91, 1);
-		border-radius: 10px;
-		overflow: hidden;
-		z-index: 1;
 		text-shadow: 5px 5px 5px rgb(61, 61, 61);
+
+		&--main {
+			color: #65c8c8;
+			margin-bottom: 0.1em;
+		}
 	}
 
-	&__title {
-		color: #65c8c8;
-		margin-bottom: 0.1em;
+	&__map {
+		margin: 0 auto;
+		width: 100%;
+		height: 50%;
+		background-color: black;
 	}
+
+	&__form {
+		height: 20%;
+		width: 100%;
+		background-image: radial-gradient(
+			circle,
+			rgb(210, 210, 210) 0%,
+			rgb(188, 185, 185) 50%,
+			rgb(178, 176, 176) 100%
+		);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__icon {
+		& i {
+			color: #5aa4a4;
+			padding: 0.5em;
+			font-size: 1.8rem;
+			cursor: pointer;
+		}
+	}
+}
+
+.find-restaurant {
+	width: 100%;
+	background-image: radial-gradient(
+		circle,
+		rgb(220, 219, 219) 0%,
+		rgb(179, 176, 176) 50%,
+		rgb(170, 170, 170) 100%
+	);
 }
 
 @import "./_medium.scss";

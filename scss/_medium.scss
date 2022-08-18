@@ -1,11 +1,20 @@
 @media (min-width: 768px) {
 	body {
-		height: calc(100vh - 2em);
+		height: 100vh;
+		font-size: 1.6rem;
 	}
-	.main {
-		&__box {
-			width: 60%;
-			height: 6em;
-		}
+
+	.container {
+		flex-direction: row;
+		height: 100vh;
+	}
+
+	.add-restaurant {
+		width: 45%;
+	}
+
+	.find-restaurant {
+		height: calc(90% + 2em);
+		width: 45%;
 	}
 }

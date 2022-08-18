@@ -14,88 +14,105 @@
 			src="https://kit.fontawesome.com/434e1998f3.js"
 			crossorigin="anonymous"
 		></script>
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+			integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+			crossorigin=""
+		/>
+		<script
+			defer
+			src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+			integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+			crossorigin=""
+		></script>
 		<link rel="stylesheet" href="./scss/style.scss" />
 		<title>Restaurants App</title>
 	</head>
 	<body>
-		<header class="wrapper">
-			<div class="main__box">
-				<h1 class="main__title">Restaurants App</h1>
-				<p class="main__description">find and add your favourite place</p>
-			</div>
-		</header>
-		<sections class="map">
-			<div class="map__image"></div>
-		</sections>
-		<section class="restaurants">
-			<h2 class="title restaurants__title">Restaurants</h2>
-			<p><i class="fa-solid fa-circle-plus"></i>Add new place</p>
-			<form class="restaurants__form restaurants__form--add">
-				<div class="form__row">
-					<label class="form__label">Name</label>
-					<input class="form__input form__input--name" placeholder="" />
+		<div class="container wrapper">
+			<section class="add-restaurant">
+				<div class="box add-restaurant__title">
+					<h1 class="add-restaurant__title--main">Restaurants App</h1>
+					<p class="add-restaurant__title--description">
+						find and add your favourite place
+					</p>
 				</div>
-				<div class="form__row">
-					<label class="form__label">Type</label>
-					<select class="form__input form__input--type">
-						<option value="cafe">Cafe</option>
-						<option value="sweets">Sweets</option>
-						<option value="breakfasts">Breakfasts</option>
-						<option value="italian">Italian</option>
-						<option value="polish">Polish</option>
-						<option value="fastfood">Fastfood</option>
-						<option value="other">Other</option>
-					</select>
+				<div id="map" class="box add-restaurant__map"></div>
+				<div class="box add-restaurant__form">
+					<p class="add-restaurant__icon">
+						<i class="fa-solid fa-circle-plus"></i>Add new restaurant
+					</p>
+					<form class="restaurant__form restaurants__form--add hidden">
+						<div class="form__row">
+							<label class="form__label">Name</label>
+							<input class="form__input form__input--name" placeholder="" />
+						</div>
+						<div class="form__row">
+							<label class="form__label">Type</label>
+							<select class="form__input form__input--type">
+								<option value="cafe">Cafe</option>
+								<option value="sweets">Sweets</option>
+								<option value="breakfasts">Breakfasts</option>
+								<option value="italian">Italian</option>
+								<option value="polish">Polish</option>
+								<option value="fastfood">Fastfood</option>
+								<option value="other">Other</option>
+							</select>
+						</div>
+						<div class="form__row">
+							<label class="form__label">Food</label>
+							<input class="form__input form__input--food" placeholder="1-10" />
+						</div>
+						<div class="form__row">
+							<label class="form__label">Service</label>
+							<input
+								class="form__input form__input--service"
+								placeholder="1-10"
+							/>
+						</div>
+						<div class="form__row">
+							<label class="form__label">Price</label>
+							<input
+								class="form__input form__input--price"
+								placeholder="1-10"
+							/>
+						</div>
+						<div class="form__row">
+							<label class="form__label">your review and impressions</label>
+							<textarea class="form__input form__input--description"></textarea>
+						</div>
+						<button class="form__btn--add">Add new place</button>
+					</form>
 				</div>
-				<div class="form__row">
-					<label class="form__label">Food</label>
-					<input class="form__input form__input--food" placeholder="1-10" />
-				</div>
-				<div class="form__row">
-					<label class="form__label">Service</label>
-					<input class="form__input form__input--service" placeholder="1-10" />
-				</div>
-				<div class="form__row">
-					<label class="form__label">Price</label>
-					<input class="form__input form__input--price" placeholder="1-10" />
-				</div>
-				<div class="form__row">
-					<label class="form__label">your review and impressions</label>
-					<textarea class="form__input form__input--description"></textarea>
-				</div>
-				<button class="form__btn--add">Add new place</button>
-			</form>
-			<form class="restaurants__form restaurants__form--find">
-				<p class="restaurants__find">find place</p>
-				<div class="form__row">
-					<label class="form__label">Name</label>
-					<input class="form__input form__input--name" placeholder="" />
-				</div>
-				<div class="form__row">
-					<label class="form__label">Type</label>
-					<select class="form__input form__input--type">
-						<option value="cafe">Cafe</option>
-						<option value="sweets">Sweets</option>
-						<option value="breakfasts">Breakfasts</option>
-						<option value="italian">Italian</option>
-						<option value="polish">Polish</option>
-						<option value="fastfood">Fastfood</option>
-						<option value="other">Other</option>
-					</select>
-				</div>
-				<button class="form__btn--find">Find place</button>
-			</form>
-			<ul class="restaurants__list hidden">
-				<!--place for restaurants list-->
-			</ul>
-		</section>
-		<!-- <footer>
-			<p class="footer__copyright">
-				&copy; Copyright by
-				<a class="linkedin__link" target="_blank" href="">Justyna Szajuk</a>.
-				All rights reserved.
-			</p>
-		</footer> -->
-		<script src="./js/script.js"></script>
+			</section>
+			<section class="box find-restaurant">
+				<h2 class="title find-restaurant__title">Restaurants</h2>
+				<form class="restaurants__form restaurants__form--find">
+					<p class="find-restaurant__description">Find restaurant</p>
+					<div class="form__row">
+						<label class="form__label">Name</label>
+						<input class="form__input form__input--name" placeholder="" />
+					</div>
+					<div class="form__row">
+						<label class="form__label">Type</label>
+						<select class="form__input form__input--type">
+							<option value="cafe">Cafe</option>
+							<option value="sweets">Sweets</option>
+							<option value="breakfasts">Breakfasts</option>
+							<option value="italian">Italian</option>
+							<option value="polish">Polish</option>
+							<option value="fastfood">Fastfood</option>
+							<option value="other">Other</option>
+						</select>
+					</div>
+					<button class="form__btn--add">Find place</button>
+				</form>
+				<ul class="restaurants__list hidden">
+					<!--place for restaurants list-->
+				</ul>
+			</section>
+		</div>
+		<script type="module" src="./js/script.js"></script>
 	</body>
 </html>

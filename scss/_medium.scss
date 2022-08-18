@@ -1,3 +1,11 @@
-// @media (min-width: 768px) {
-
-// }
+@media (min-width: 768px) {
+	body {
+		height: calc(100vh - 2em);
+	}
+	.main {
+		&__box {
+			width: 60%;
+			height: 6em;
+		}
+	}
+}

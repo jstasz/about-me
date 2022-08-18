@@ -18,13 +18,10 @@
 		<title>Restaurants App</title>
 	</head>
 	<body>
-		<header>
-			<div class="main__photo">
-				<div class="main__text">
-					<h1 class="main__title">Restaurants App</h1>
-					<p class="main__description">find and add your favourite place</p>
-				</div>
-				<div class="main__shadow"></div>
+		<header class="wrapper">
+			<div class="main__box">
+				<h1 class="main__title">Restaurants App</h1>
+				<p class="main__description">find and add your favourite place</p>
 			</div>
 		</header>
 		<sections class="map">
@@ -33,7 +30,7 @@
 		<section class="restaurants">
 			<h2 class="title restaurants__title">Restaurants</h2>
 			<p><i class="fa-solid fa-circle-plus"></i>Add new place</p>
-			<form class="restaurants__form restaurants__form--add hidden">
+			<form class="restaurants__form restaurants__form--add">
 				<div class="form__row">
 					<label class="form__label">Name</label>
 					<input class="form__input form__input--name" placeholder="" />
@@ -88,7 +85,9 @@
 				</div>
 				<button class="form__btn--find">Find place</button>
 			</form>
-			<ul class="restaurants__list hidden"></ul>
+			<ul class="restaurants__list hidden">
+				<!--place for restaurants list-->
+			</ul>
 		</section>
 		<!-- <footer>
 			<p class="footer__copyright">

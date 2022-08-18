@@ -12,8 +12,9 @@ html {
 
 body {
 	font-family: "Montserrat", sans-serif;
-	font-size: 1.6rem;
-	background-color: #0000;
+	font-size: 1.2rem;
+	background-color: rgb(155, 154, 154);
+	margin: 1em;
 }
 
 .wrapper {
@@ -25,3 +26,36 @@ body {
 .hidden {
 	display: none;
 }
+
+.main {
+	&__box {
+		color: rgb(208, 207, 207);
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 20vh;
+		text-align: center;
+		padding: 1em;
+		background-image: radial-gradient(
+			circle,
+			rgb(93, 93, 93) 0%,
+			rgb(77, 77, 77) 50%,
+			rgb(44, 44, 44) 100%
+		);
+		box-shadow: 8px 8px 24px 0px rgba(91, 91, 91, 1);
+		border-radius: 10px;
+		overflow: hidden;
+		z-index: 1;
+		text-shadow: 5px 5px 5px rgb(61, 61, 61);
+	}
+
+	&__title {
+		color: #65c8c8;
+		margin-bottom: 0.1em;
+	}
+}
+
+@import "./_medium.scss";

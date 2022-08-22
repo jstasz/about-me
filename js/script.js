@@ -31,7 +31,9 @@ class Restaurants {
 	}
 
 	_calcAverage() {
-		this.average = (this.food + this.service + this.price) / 3;
+		this.average = Math.random(
+			(this.food + this.service + this.price) / 3
+		).toFixed(2);
 		return this.average;
 	}
 }

@@ -205,10 +205,11 @@ body {
 		list-style-type: none;
 
 		& .restaurant {
+			margin: 0.5em 0;
 			position: relative;
-			background-color: rgb(117, 117, 117);
+			background-color: rgb(151, 151, 151);
 			border-radius: 5px;
-			padding: 1em;
+			padding: 0.5em 2em;
 			color: rgb(214, 212, 212);
 			text-align: center;
 			overflow: hidden;
@@ -226,7 +227,7 @@ body {
 			&__header {
 				display: flex;
 				align-items: center;
-				justify-content: space-around;
+				justify-content: space-between;
 				color: #2c2c2c;
 
 				&-title {

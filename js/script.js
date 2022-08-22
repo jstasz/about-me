@@ -4,39 +4,58 @@
 
 import { leaflet } from "leaflet/dist/leaflet.js";
 
-if (navigator.geolocation)
-	navigator.geolocation.getCurrentPosition(
-		function (position) {
-			const { latitude } = position.coords;
-			const { longitude } = position.coords;
+class App {
+	#map;
+	#mapZoomLevel = 13;
+	#mapEvent;
+	#restaurants = [];
 
-			const map = L.map("map").setView([51.505, -0.09], 13);
+	constructor() {
+		this._getPosition();
+	}
 
-			L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-				attribution:
-					'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-			}).addTo(map);
+	_getPosition() {
+		if (navigator.geolocation)
+			navigator.geolocation.getCurrentPosition(
+				this._loadMap.bind(this),
+				function () {
+					alert(`could not get your position`);
+				}
+			);
+	}
 
-			L.marker([51.5, -0.09])
-				.addTo(map)
-				.bindPopup("A pretty CSS3 popup.<br> Easily customizable.")
-				.openPopup();
-		},
+	_loadMap(position) {
+		const { latitude } = position.coords;
+		const { longitude } = position.coords;
 
-		function () {
-			alert("could not get your position");
-		}
-	);
+		const coords = [latitude, longitude];
+
+		this.#map = L.map("map").setView(coords, this.#mapZoomLevel);
+
+		L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
+			attribution:
+				'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+		}).addTo(this.#map);
+
+		// this.#map.on("click", this._showForm.bind(this));
+
+		this.#restaurants.forEach((restaurant) =>
+			this._renderRestaurantMarker(restaurant)
+		);
+	}
+}
+
+const Apllication = new App();
 
 // active add and find restaurant
 
-const addBtn = document.querySelector(".main__icon--add");
+const addIcon = document.querySelector(".main__forms-icon--add");
 const mapBox = document.querySelector(".main__map");
-const addBox = document.querySelector(".main__add-restaurant");
-const addForm = document.querySelector(".restaurant__form--add");
-const findBtn = document.querySelector(".main__icon--find");
-const findForm = document.querySelector(".restaurant__form--find");
-const icons = document.querySelector(".main__icons");
+const addBox = document.querySelector(".main__forms");
+const addForm = document.querySelector(".main__forms--add");
+const findIcon = document.querySelector(".main__forms-icon--find");
+const findForm = document.querySelector(".main__forms--find");
+const icons = document.querySelector(".main__forms-icons");
 const addSubmitBtn = document.querySelector(".form__btn--add");
 const findSubmitBtn = document.querySelector(".form__btn--find");
 const restaurantlistSection = document.querySelector(".restaurants");
@@ -47,8 +66,8 @@ const firstLayout = function () {
 };
 
 const changeLayout = function () {
-	mapBox.style.height = "40%";
-	addBox.style.height = "40%";
+	mapBox.style.height = "60%";
+	addBox.style.height = "20%";
 };
 
 const showAddForm = function () {
@@ -56,21 +75,16 @@ const showAddForm = function () {
 	icons.classList.add("hidden");
 };
 
-addBtn.addEventListener("click", changeLayout);
-addBtn.addEventListener("click", showAddForm);
+addIcon.addEventListener("click", changeLayout);
+addIcon.addEventListener("click", showAddForm);
 
 const showFindForm = function () {
 	findForm.classList.remove("form--hidden");
 	icons.classList.add("hidden");
 };
 
-const changeLayout1 = function () {
-	mapBox.style.height = "50%";
-	addBox.style.height = "30%";
-};
-
-findBtn.addEventListener("click", changeLayout1);
-findBtn.addEventListener("click", showFindForm);
+findIcon.addEventListener("click", changeLayout);
+findIcon.addEventListener("click", showFindForm);
 
 const deleteAddForm = function () {
 	icons.classList.remove("hidden");

@@ -39,20 +39,22 @@
 					</p>
 				</div>
 				<div id="map" class="box main__map"></div>
-				<div class="box main__add-restaurant">
-					<div class="main__icons">
+				<div class="box main__forms">
+					<div class="main__forms-icons">
 						<p class="activator__form--add">
-							<i class="main__icon main__icon--add fa-solid fa-circle-plus"></i
+							<i
+								class="main__forms-icon main__forms-icon--add fa-solid fa-circle-plus"
+							></i
 							>Add new place
 						</p>
 						<p class="activator__form--find">
 							<i
-								class="main__icon main__icon--find fa-solid fa-magnifying-glass"
+								class="main__forms-icon main__forms-icon--find fa-solid fa-magnifying-glass"
 							></i
 							>Find restaurant
 						</p>
 					</div>
-					<form class="form restaurant__form--add form--hidden">
+					<form class="form main__forms--add form--hidden">
 						<div class="form__row form__row--name">
 							<input class="form__input form__input--name" placeholder="name" />
 						</div>
@@ -76,7 +78,7 @@
 								placeholder="place"
 							/>
 						</div>
-						<div class="form__row form__row--food">
+						<!-- <div class="form__row form__row--food">
 							<label class="form__label">Food</label>
 							<select class="form__input form__input--food">
 								<option value="1">1</option>
@@ -126,37 +128,32 @@
 								class="form__input form__input--description"
 								placeholder="your review and impressions"
 							></textarea>
-						</div>
+						</div> -->
 						<button class="form__btn form__btn--add">Add new place</button>
 					</form>
-					<div class="restaurants__find-restaurant">
-						<form class="form restaurant__form--find form--hidden">
-							<div class="form__row form__row--name">
-								<input
-									class="form__input form__input--name"
-									placeholder="name"
-								/>
-							</div>
-							<div class="form__row form__row--type">
-								<select class="form__input form__input--type">
-									<option value="cafe">Cafe</option>
-									<option value="sweets">Sweets</option>
-									<option value="breakfasts">Breakfasts</option>
-									<option value="italian">Italian</option>
-									<option value="polish">Polish</option>
-									<option value="fastfood">Fastfood</option>
-									<option value="other">Other</option>
-								</select>
-							</div>
-							<div class="form__row form__row--place">
-								<input
-									class="form__input form__input--place"
-									placeholder="place"
-								/>
-							</div>
-							<button class="form__btn form__btn--find">Find place</button>
-						</form>
-					</div>
+					<form class="form main__forms--find form--hidden">
+						<div class="form__row form__row--name">
+							<input class="form__input form__input--name" placeholder="name" />
+						</div>
+						<div class="form__row form__row--type">
+							<select class="form__input form__input--type">
+								<option value="cafe">Cafe</option>
+								<option value="sweets">Sweets</option>
+								<option value="breakfasts">Breakfasts</option>
+								<option value="italian">Italian</option>
+								<option value="polish">Polish</option>
+								<option value="fastfood">Fastfood</option>
+								<option value="other">Other</option>
+							</select>
+						</div>
+						<div class="form__row form__row--place">
+							<input
+								class="form__input form__input--place"
+								placeholder="place"
+							/>
+						</div>
+						<button class="form__btn form__btn--find">Find place</button>
+					</form>
 				</div>
 			</section>
 			<section class="box restaurants">

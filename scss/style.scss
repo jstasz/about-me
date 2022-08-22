@@ -49,13 +49,6 @@ body {
 	margin: 1em;
 }
 
-.small-box {
-	background-color: rgb(117, 117, 117);
-	border-radius: 5px;
-	padding: 1em;
-	color: rgb(235, 235, 235);
-}
-
 .form {
 	display: flex;
 	flex-wrap: wrap;
@@ -206,6 +199,57 @@ body {
 		color: rgb(80, 80, 80);
 		text-align: center;
 		padding: 0.5em;
+	}
+
+	&__list {
+		list-style-type: none;
+
+		& .restaurant {
+			position: relative;
+			background-color: rgb(117, 117, 117);
+			border-radius: 5px;
+			padding: 1em;
+			color: rgb(214, 212, 212);
+			text-align: center;
+			overflow: hidden;
+
+			&::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 0.5em;
+				height: 100%;
+				background-color: rgb(143, 193, 143);
+			}
+
+			&__header {
+				display: flex;
+				align-items: center;
+				justify-content: space-around;
+				color: #2c2c2c;
+
+				&-title {
+					margin-right: 0.5em;
+				}
+
+				&-average {
+					font-size: 2rem;
+					font-weight: 700;
+				}
+			}
+
+			&__description {
+				margin: 0.7em 0;
+			}
+
+			&__scoores {
+				// font-size: 2rem;
+				width: 100%;
+				display: flex;
+				justify-content: space-around;
+			}
+		}
 	}
 }
 

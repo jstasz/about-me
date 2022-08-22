@@ -1,8 +1,5 @@
 "use strict";
 
-//map
-
-import { leaflet } from "leaflet/dist/leaflet.js";
 const addIcon = document.querySelector(".main__forms-icon--add");
 const mapBox = document.querySelector(".main__map");
 const addBox = document.querySelector(".main__forms");
@@ -12,20 +9,14 @@ const findForm = document.querySelector(".main__forms--find");
 const icons = document.querySelector(".main__forms-icons");
 const addSubmitBtn = document.querySelector(".form__btn--add");
 const findSubmitBtn = document.querySelector(".form__btn--find");
-const restaurantlistSection = document.querySelector(".restaurants");
+const restaurantsSection = document.querySelector(".restaurants");
 const inputName = addForm.querySelector(".form__input--name");
 const inputType = addForm.querySelector(".form__input--type");
 const inputFood = addForm.querySelector(".form__input--food");
 const inputService = addForm.querySelector(".form__input--service");
 const inputPrice = addForm.querySelector(".form__input--price");
 const inputDescription = addForm.querySelector(".form__input--description");
-
-const activeAddForm = function () {
-	mapBox.style.height = "60%";
-	addBox.style.height = "20%";
-	addForm.classList.remove("form--hidden");
-	icons.classList.add("hidden");
-};
+const restaurantList = document.querySelector(".restaurants__list");
 
 class Restaurants {
 	constructor(coords, name, type, food, service, price, description) {
@@ -112,7 +103,7 @@ class App {
 	}
 
 	_scrolltoList(e) {
-		const listTop = restaurantlistSection.offsetTop;
+		const listTop = restaurantsSection.offsetTop;
 		window.scrollTo(0, listTop - 10);
 	}
 
@@ -142,6 +133,8 @@ class App {
 		this._renderRestaurantMarker(restaurant);
 
 		this._hideAddForm();
+
+		this._renderRestaurant(restaurant);
 	}
 
 	_renderRestaurantMarker(restaurant) {
@@ -160,6 +153,31 @@ class App {
 				`${restaurant.name} (${restaurant.type}) ${restaurant.average}`
 			)
 			.openPopup();
+	}
+
+	_renderRestaurant(restaurant) {
+		let html = `
+		<li class="restaurant restaurant__high-score">
+			<div class="restaurant__header">
+				<h3 class="restaurant__header-title">${restaurant.name} - ${
+			restaurant.type
+		}</h3>
+				<p class="restaurant__header-average">${restaurant.average > 7 ? "😍" : "☹️"} ${
+			restaurant.average
+		}</p>
+			</div>
+			<div class="restaurant__description">
+				<p>${restaurant.description}</p>
+			</div>
+			<div class="restaurant__scoores">
+				<p class="restaurant__icon--eat">🍔 = ${restaurant.food}</p>
+				<p class="restaurant__icon--service">🍽 = ${restaurant.service}</p>
+				<p class="restaurant__icon--price">💸 = ${restaurant.price}</p>
+			</div>
+		</li>
+		`;
+
+		restaurantList.insertAdjacentHTML("afterbegin", html);
 	}
 }
 

@@ -1,19 +1,26 @@
 @media (min-width: 768px) {
 	body {
 		height: 100vh;
-		font-size: 1.6rem;
+		font-size: 1.4rem;
 	}
 
 	.container {
 		flex-direction: row;
 		height: 100vh;
+		min-height: 700px;
+		max-height: 1200px;
 	}
 
-	.add-restaurant {
+	.main {
 		width: 45%;
+		height: 100%;
+
+		// &__restaurants {
+		// 	padding: 3em;
+		// }
 	}
 
-	.find-restaurant {
+	.restaurants {
 		height: calc(90% + 2em);
 		width: 45%;
 	}

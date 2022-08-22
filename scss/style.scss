@@ -8,11 +8,12 @@
 
 html {
 	font-size: 62.5%;
+	scroll-behavior: smooth;
 }
 
 body {
 	font-family: "Montserrat", sans-serif;
-	font-size: 1.4rem;
+	font-size: 1.2rem;
 	background-color: rgb(111, 111, 111);
 	margin: 0 1em;
 }
@@ -28,17 +29,14 @@ body {
 }
 
 .container {
-	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	// height: 100vh;
 }
 
 .box {
-	padding: 1em;
 	background-image: radial-gradient(
 		circle,
 		rgb(93, 93, 93) 0%,
@@ -51,14 +49,96 @@ body {
 	margin: 1em;
 }
 
-.add-restaurant {
+.small-box {
+	background-color: rgb(117, 117, 117);
+	border-radius: 5px;
+	padding: 1em;
+	color: rgb(235, 235, 235);
+}
+
+.form {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: center;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	padding: 3em;
+
+	&__row {
+		margin: 0.2em;
+		::placeholder {
+			text-align: center;
+			color: rgb(83, 83, 83);
+		}
+	}
+
+	&__row--name {
+		width: 65%;
+	}
+
+	&__row--place {
+		width: 100%;
+	}
+
+	&__row--type,
+	&__row--food,
+	&__row--service,
+	&__row--price {
+		width: 30%;
+	}
+
+	&__row--description {
+		width: 100%;
+		margin-top: 1em;
+	}
+
+	&__label {
+		padding-bottom: 0.2em;
+		margin-top: 5em;
+	}
+
+	&__input {
+		background-color: rgb(224, 224, 224);
+		border-radius: 5px;
+		padding: 0.2em;
+		margin: 0.2em;
+		width: 100%;
+
+		&--description {
+			min-height: 60px;
+			max-height: 60px;
+		}
+	}
+
+	&__btn {
+		display: block;
+		margin: 0.5em auto 0;
+		right: 0;
+		padding: 0.3em 0.6em;
+		background-color: #5aa4a4;
+		color: rgb(230, 229, 229);
+		border: thin solid rgb(69, 69, 69);
+		border-radius: 5px;
+	}
+
+	&--hidden {
+		display: none;
+	}
+}
+
+.main {
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	align-content: center;
 	width: 100%;
 	height: 100vh;
+	min-height: 650px;
 
 	&__title {
 		color: rgb(208, 207, 207);
@@ -68,7 +148,7 @@ body {
 		justify-content: center;
 		align-items: center;
 		width: 100%;
-		height: 20%;
+		height: 10%;
 		text-align: center;
 		text-shadow: 5px 5px 5px rgb(61, 61, 61);
 
@@ -81,12 +161,19 @@ body {
 	&__map {
 		margin: 0 auto;
 		width: 100%;
-		height: 50%;
+		height: 65%;
+		// height: 40%;
 		background-color: black;
 	}
 
-	&__form {
-		height: 20%;
+	&__add-restaurant {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-around;
+		padding: 1em;
+		height: 15%;
+		// height: 40%;
 		width: 100%;
 		background-image: radial-gradient(
 			circle,
@@ -94,29 +181,33 @@ body {
 			rgb(188, 185, 185) 50%,
 			rgb(178, 176, 176) 100%
 		);
-		display: flex;
-		justify-content: center;
-		align-items: center;
 	}
 
 	&__icon {
-		& i {
-			color: #5aa4a4;
-			padding: 0.5em;
-			font-size: 1.8rem;
-			cursor: pointer;
-		}
+		color: #5aa4a4;
+		padding: 0.5em;
+		font-size: 1.8rem;
+		cursor: pointer;
 	}
 }
 
-.find-restaurant {
+.restaurants {
+	padding: 1em;
 	width: 100%;
+	height: 1000px;
 	background-image: radial-gradient(
 		circle,
 		rgb(220, 219, 219) 0%,
 		rgb(179, 176, 176) 50%,
 		rgb(170, 170, 170) 100%
 	);
+
+	&__title {
+		color: rgb(80, 80, 80);
+		text-align: center;
+		padding: 0.5em;
+	}
 }
 
+@import "./_small.scss";
 @import "./_medium.scss";

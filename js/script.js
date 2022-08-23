@@ -15,26 +15,29 @@ const inputType = addForm.querySelector(".form__input--type");
 const inputFood = addForm.querySelector(".form__input--food");
 const inputService = addForm.querySelector(".form__input--service");
 const inputPrice = addForm.querySelector(".form__input--price");
-const inputDescription = addForm.querySelector(".form__input--description");
+const inputImpress = addForm.querySelector(".form__input--impress");
 const restaurantList = document.querySelector(".restaurants__list");
 
 class Restaurants {
 	date = new Date();
 	id = (Date.now() + "").slice(-10);
 
-	constructor(coords, name, type, food, service, price, description) {
+	constructor(coords, name, type, food, service, price, impress) {
 		this.coords = coords;
 		this.name = name;
 		this.type = type;
 		this.food = food;
 		this.service = service;
 		this.price = price;
-		this.description = description;
+		this.impress = impress;
 		this._calcAverage();
 	}
 
 	_calcAverage() {
-		this.average = ((this.food + this.service + this.price) / 3).toFixed(2);
+		this.average = (
+			(this.food + this.service + this.price + this.impress) /
+			4
+		).toFixed(2);
 		return this.average;
 	}
 }
@@ -88,7 +91,7 @@ class App {
 	}
 
 	_changeLayout() {
-		mapBox.style.height = "55%";
+		mapBox.style.height = "45%";
 		addBox.style.height = "35%";
 		icons.classList.add("hidden");
 		inputName.focus();
@@ -118,7 +121,7 @@ class App {
 		const food = +inputFood.value;
 		const service = +inputService.value;
 		const price = +inputPrice.value;
-		const description = inputDescription.value;
+		const impress = +inputImpress.value;
 		const { lat, lng } = this.#mapEvent.latlng;
 		let restaurant;
 
@@ -129,7 +132,7 @@ class App {
 			food,
 			service,
 			price,
-			description
+			impress
 		);
 
 		this.#restaurants.push(restaurant);
@@ -152,7 +155,9 @@ class App {
 					minWidth: 100,
 					autoClose: false,
 					closeOnClick: false,
-					// className: `${workout.type}-popup`,
+					className: `${
+						restaurant.average >= 7 ? "highscore" : "lowscore"
+					}-popup`,
 				})
 			)
 			.setPopupContent(
@@ -163,22 +168,22 @@ class App {
 
 	_renderRestaurant(restaurant) {
 		let html = `
-		<li class="restaurant restaurant__high-score" data-id="${restaurant.id}">
+		<li class="restaurant restaurant-${
+			restaurant.average >= 6 ? "heighscore" : "lowscore"
+		}" data-id="${restaurant.id}">
 			<div class="restaurant__header">
 				<h3 class="restaurant__header-title">${restaurant.name} - ${
 			restaurant.type
 		}</h3>
-				<p class="restaurant__header-average">${restaurant.average > 7 ? "😍" : "☹️"} ${
+				<p class="restaurant__header-average">${restaurant.average >= 7 ? "" : ""} ${
 			restaurant.average
 		}</p>
-			</div>
-			<div class="restaurant__description">
-				<p>${restaurant.description}</p>
 			</div>
 			<div class="restaurant__scoores">
 				<p class="restaurant__icon--eat">🍔 = ${restaurant.food}</p>
 				<p class="restaurant__icon--service">🍽 = ${restaurant.service}</p>
 				<p class="restaurant__icon--price">💸 = ${restaurant.price}</p>
+				<p class="restaurant__icon--impress">❤️ = ${restaurant.impress}</p>
 			</div>
 		</li>
 		`;
@@ -188,21 +193,17 @@ class App {
 
 	_moveToPopup(e) {
 		const restaurantListEl = e.target.closest(".restaurant");
-		console.log(restaurantListEl);
 
 		if (!restaurantListEl) return;
 
 		const restaurant = this.#restaurants.find(
 			(rest) => rest.id === restaurantListEl.dataset.id
 		);
-		console.log(restaurant.coords);
 
 		this.#map.setView(restaurant.coords, this.#mapZoomLevel, {
 			animate: true,
-			pan: { duration: 2 },
+			pan: { duration: 1 },
 		});
-
-		// restaurant.click();
 	}
 }
 

@@ -19,6 +19,9 @@ const inputDescription = addForm.querySelector(".form__input--description");
 const restaurantList = document.querySelector(".restaurants__list");
 
 class Restaurants {
+	date = new Date();
+	id = (Date.now() + "").slice(-10);
+
 	constructor(coords, name, type, food, service, price, description) {
 		this.coords = coords;
 		this.name = name;
@@ -31,9 +34,7 @@ class Restaurants {
 	}
 
 	_calcAverage() {
-		this.average = Math.random(
-			(this.food + this.service + this.price) / 3
-		).toFixed(2);
+		this.average = ((this.food + this.service + this.price) / 3).toFixed(2);
 		return this.average;
 	}
 }
@@ -47,6 +48,7 @@ class App {
 	constructor() {
 		this._getPosition();
 		addForm.addEventListener("submit", this._newRestaurant.bind(this));
+		restaurantList.addEventListener("click", this._moveToPopup.bind(this));
 	}
 
 	_getPosition() {
@@ -132,6 +134,8 @@ class App {
 
 		this.#restaurants.push(restaurant);
 
+		console.log(restaurant.id);
+
 		this._renderRestaurantMarker(restaurant);
 
 		this._hideAddForm();
@@ -159,7 +163,7 @@ class App {
 
 	_renderRestaurant(restaurant) {
 		let html = `
-		<li class="restaurant restaurant__high-score">
+		<li class="restaurant restaurant__high-score" data-id="${restaurant.id}">
 			<div class="restaurant__header">
 				<h3 class="restaurant__header-title">${restaurant.name} - ${
 			restaurant.type
@@ -180,6 +184,25 @@ class App {
 		`;
 
 		restaurantList.insertAdjacentHTML("afterbegin", html);
+	}
+
+	_moveToPopup(e) {
+		const restaurantListEl = e.target.closest(".restaurant");
+		console.log(restaurantListEl);
+
+		if (!restaurantListEl) return;
+
+		const restaurant = this.#restaurants.find(
+			(rest) => rest.id === restaurantListEl.dataset.id
+		);
+		console.log(restaurant.coords);
+
+		this.#map.setView(restaurant.coords, this.#mapZoomLevel, {
+			animate: true,
+			pan: { duration: 2 },
+		});
+
+		// restaurant.click();
 	}
 }
 

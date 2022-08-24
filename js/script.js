@@ -4,6 +4,7 @@ const addIcon = document.querySelector(".main__forms-icon--add");
 const mapBox = document.querySelector(".main__map");
 const addBox = document.querySelector(".main__forms");
 const addForm = document.querySelector(".main__forms--add");
+const closeFormIcon = document.querySelector(".form__close");
 const findIcon = document.querySelector(".main__forms-icon--find");
 const findForm = document.querySelector(".main__forms--find");
 const icons = document.querySelector(".main__forms-icons");
@@ -52,6 +53,7 @@ class App {
 		this._getPosition();
 		addForm.addEventListener("submit", this._newRestaurant.bind(this));
 		restaurantList.addEventListener("click", this._moveToPopup.bind(this));
+		closeFormIcon.addEventListener("click", this._hideAddForm.bind(this));
 	}
 
 	_getPosition() {
@@ -99,6 +101,11 @@ class App {
 
 	_hideAddForm() {
 		this._startedLayout();
+		inputName.value = "";
+		inputType.value = "cafe";
+
+		//prettier-ignore
+		inputFood.value = inputService.value = inputPrice.value = inputImpress.value = "1";
 		setTimeout(this._scrolltoList, 1500);
 	}
 
@@ -160,9 +167,7 @@ class App {
 					}-popup`,
 				})
 			)
-			.setPopupContent(
-				`${restaurant.name} (${restaurant.type}) ${restaurant.average}`
-			)
+			.setPopupContent(`${restaurant.name} / ${restaurant.average}`)
 			.openPopup();
 	}
 

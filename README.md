@@ -11,3 +11,5 @@
 * sort results <br>
 * local storage <br>
 </ul>
+
+to fix - map with current position after reload page

@@ -50,6 +50,7 @@ class App {
 	#restaurants = [];
 
 	constructor() {
+		this._getLocalStorage();
 		this._getPosition();
 		addForm.addEventListener("submit", this._newRestaurant.bind(this));
 		restaurantList.addEventListener("click", this._moveToPopup.bind(this));
@@ -69,6 +70,8 @@ class App {
 	_loadMap(position) {
 		const { latitude } = position.coords;
 		const { longitude } = position.coords;
+
+		console.log(position);
 
 		const coords = [latitude, longitude];
 
@@ -144,30 +147,39 @@ class App {
 
 		this.#restaurants.push(restaurant);
 
-		console.log(restaurant.id);
-
 		this._renderRestaurantMarker(restaurant);
+
+		this._renderRestaurantPopup(restaurant);
 
 		this._hideAddForm();
 
 		this._renderRestaurant(restaurant);
+
+		this._setLocalStorage();
 	}
 
 	_renderRestaurantMarker(restaurant) {
+		L.marker(restaurant.coords)
+			.addTo(this.#map)
+			.setPopupContent(`${restaurant.name} ${restaurant.average}`)
+			.openPopup();
+	}
+
+	_renderRestaurantPopup(restaurant) {
 		L.marker(restaurant.coords)
 			.addTo(this.#map)
 			.bindPopup(
 				L.popup({
 					maxWidth: 250,
 					minWidth: 100,
-					autoClose: false,
+					autoClose: true,
 					closeOnClick: false,
 					className: `${
 						restaurant.average >= 7 ? "highscore" : "lowscore"
 					}-popup`,
 				})
 			)
-			.setPopupContent(`${restaurant.name} / ${restaurant.average}`)
+			.setPopupContent(`${restaurant.name} ${restaurant.average}`)
 			.openPopup();
 	}
 
@@ -205,10 +217,32 @@ class App {
 			(rest) => rest.id === restaurantListEl.dataset.id
 		);
 
+		this._renderRestaurantPopup(restaurant);
+
 		this.#map.setView(restaurant.coords, this.#mapZoomLevel, {
 			animate: true,
 			pan: { duration: 1 },
 		});
+	}
+
+	_setLocalStorage() {
+		localStorage.setItem("restaurants", JSON.stringify(this.#restaurants));
+	}
+
+	_getLocalStorage() {
+		const data = JSON.parse(localStorage.getItem("restaurants"));
+
+		if (!data) return;
+
+		this.#restaurants = data;
+		this.#restaurants.forEach((restaurant) =>
+			this._renderRestaurant(restaurant)
+		);
+	}
+
+	reset() {
+		localStorage.removeItem("restaurants");
+		location.reload();
 	}
 }
 

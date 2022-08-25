@@ -4,8 +4,8 @@ const addIcon = document.querySelector(".main__forms-icon--add");
 const mapBox = document.querySelector(".main__map");
 const addBox = document.querySelector(".main__forms");
 const addForm = document.querySelector(".main__forms--add");
-const closeFormIcon = document.querySelector(".form__close");
-const findIcon = document.querySelector(".main__forms-icon--find");
+const closeFormIcon = document.querySelectorAll(".form__close");
+const findIcon = document.querySelector(".activator__form--find");
 const findForm = document.querySelector(".main__forms--find");
 const icons = document.querySelector(".main__forms-icons");
 const addSubmitBtn = document.querySelector(".form__btn--add");
@@ -18,6 +18,8 @@ const inputService = addForm.querySelector(".form__input--service");
 const inputPrice = addForm.querySelector(".form__input--price");
 const inputImpress = addForm.querySelector(".form__input--impress");
 const restaurantList = document.querySelector(".restaurants__list");
+
+console.log(findIcon);
 
 class Restaurants {
 	date = new Date();
@@ -54,7 +56,10 @@ class App {
 		this._getPosition();
 		addForm.addEventListener("submit", this._newRestaurant.bind(this));
 		restaurantList.addEventListener("click", this._moveToPopup.bind(this));
-		closeFormIcon.addEventListener("click", this._hideAddForm.bind(this));
+		closeFormIcon.forEach((icon) =>
+			icon.addEventListener("click", this._startedLayout.bind(this))
+		);
+		findIcon.addEventListener("click", this._showFindForm.bind(this));
 	}
 
 	_getPosition() {
@@ -70,8 +75,6 @@ class App {
 	_loadMap(position) {
 		const { latitude } = position.coords;
 		const { longitude } = position.coords;
-
-		console.log(position);
 
 		const coords = [latitude, longitude];
 
@@ -90,8 +93,15 @@ class App {
 	}
 
 	_showAddForm(mapE) {
+		if (!findForm.classList.contains("form--hidden")) return;
+
 		this.#mapEvent = mapE;
 		addForm.classList.remove("form--hidden");
+		this._changeLayout();
+	}
+
+	_showFindForm() {
+		findForm.classList.remove("form--hidden");
 		this._changeLayout();
 	}
 
@@ -102,21 +112,21 @@ class App {
 		inputName.focus();
 	}
 
-	_hideAddForm() {
-		this._startedLayout();
+	_startedLayout() {
+		this._clearForms();
+		mapBox.style.height = "65%";
+		addBox.style.height = "15%";
+	}
+
+	_clearForms() {
+		icons.classList.remove("hidden");
+		addForm.classList.add("form--hidden");
+		findForm.classList.add("form--hidden");
 		inputName.value = "";
 		inputType.value = "cafe";
 
 		//prettier-ignore
 		inputFood.value = inputService.value = inputPrice.value = inputImpress.value = "1";
-		setTimeout(this._scrolltoList, 1500);
-	}
-
-	_startedLayout() {
-		mapBox.style.height = "65%";
-		addBox.style.height = "15%";
-		icons.classList.remove("hidden");
-		addForm.classList.add("form--hidden");
 	}
 
 	_scrolltoList(e) {
@@ -147,11 +157,11 @@ class App {
 
 		this.#restaurants.push(restaurant);
 
-		this._renderRestaurantMarker(restaurant);
-
 		this._renderRestaurantPopup(restaurant);
 
-		this._hideAddForm();
+		this._startedLayout();
+
+		setTimeout(this._scrolltoList, 1500);
 
 		this._renderRestaurant(restaurant);
 
@@ -161,8 +171,18 @@ class App {
 	_renderRestaurantMarker(restaurant) {
 		L.marker(restaurant.coords)
 			.addTo(this.#map)
-			.setPopupContent(`${restaurant.name} ${restaurant.average}`)
-			.openPopup();
+			.bindPopup(
+				L.popup({
+					maxWidth: 250,
+					minWidth: 100,
+					autoClose: true,
+					closeOnClick: false,
+					className: `${
+						restaurant.average >= 7 ? "highscore" : "lowscore"
+					}-popup`,
+				})
+			)
+			.setPopupContent(`${restaurant.name} ${restaurant.average}`);
 	}
 
 	_renderRestaurantPopup(restaurant) {
@@ -173,7 +193,7 @@ class App {
 					maxWidth: 250,
 					minWidth: 100,
 					autoClose: true,
-					closeOnClick: false,
+					closeOnClick: true,
 					className: `${
 						restaurant.average >= 7 ? "highscore" : "lowscore"
 					}-popup`,
@@ -246,4 +266,4 @@ class App {
 	}
 }
 
-const Apllication = new App();
+const Application = new App();

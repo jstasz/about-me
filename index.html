@@ -10,10 +10,10 @@
 			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap"
 			rel="stylesheet"
 		/>
-		<!-- <script
+		<script
 			src="https://kit.fontawesome.com/434e1998f3.js"
 			crossorigin="anonymous"
-		></script> -->
+		></script>
 		<link
 			rel="stylesheet"
 			href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
@@ -43,6 +43,10 @@
 					<div class="main__forms-icons">
 						<p class="activator__form--add">
 							click on the map to add new restaurant
+						</p>
+						<p class="">
+							or <span class="activator__form--find">find</span> your favourite
+							place
 						</p>
 					</div>
 					<form class="form main__forms--add form--hidden">
@@ -126,7 +130,8 @@
 						</div>
 						<button class="form__btn form__btn--add">Add new place +</button>
 					</form>
-					<!-- <form class="form main__forms--find form--hidden">
+					<form class="form main__forms--find form--hidden">
+						<div class="form__close"><i class="fa-solid fa-xmark"></i></div>
 						<div class="form__row form__row--name">
 							<input class="form__input form__input--name" placeholder="name" />
 						</div>
@@ -141,14 +146,8 @@
 								<option value="other">Other</option>
 							</select>
 						</div>
-						<div class="form__row form__row--place">
-							<input
-								class="form__input form__input--place"
-								placeholder="place"
-							/>
-						</div>
 						<button class="form__btn form__btn--find">Find place</button>
-					</form> -->
+					</form>
 				</div>
 			</section>
 			<section class="box restaurants">
@@ -156,6 +155,16 @@
 				<ul class="restaurants__list">
 					<!--place for restaurants list-->
 				</ul>
+				<!-- <div class="restaurants__pages">
+					<i class="change-page change-page--first fa-solid fa-angles-left"></i>
+					<i
+						class="change-page change-page--previous fa-solid fa-angle-left"
+					></i>
+					<i
+						class="change-page change-page--next fa-solid fa-chevron-right"
+					></i>
+					<i class="change-page change-page--last fa-solid fa-angles-right"></i>
+				</div> -->
 			</section>
 		</div>
 		<script type="module" src="./js/script.js"></script>

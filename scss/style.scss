@@ -50,8 +50,6 @@ body {
 }
 
 .form {
-	// background-color: rgb(48, 48, 48);
-	// position: relative;
 	border-radius: 10px;
 	display: flex;
 	flex-wrap: wrap;
@@ -63,7 +61,7 @@ body {
 	padding: 2em;
 
 	&__close {
-		color: rgb(119, 119, 119);
+		color: rgb(100, 99, 99);
 		padding: 0.5em;
 		margin: 1em;
 		position: absolute;
@@ -185,19 +183,24 @@ body {
 			rgb(50, 50, 50) 100%
 		);
 
-		&-icon {
-			color: #5aa4a4;
-			padding: 0.5em;
-			font-size: 1.8rem;
-			cursor: pointer;
+		&-icons {
+			text-align: center;
+
+			& .activator__form--find {
+				color: #65c8c8;
+				font-weight: 600;
+				cursor: pointer;
+			}
 		}
 	}
 }
 
 .restaurants {
-	padding: 1em;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 1em 0;
 	width: 100%;
-	height: 1000px;
 	background-image: radial-gradient(
 		circle,
 		rgb(77, 77, 77) 0%,
@@ -208,11 +211,11 @@ body {
 	&__title {
 		color: rgb(185, 185, 185);
 		text-align: center;
-		padding: 0.5em;
 	}
 
 	&__list {
 		list-style-type: none;
+		padding: 1em;
 
 		& .restaurant {
 			margin: 0.5em 0;
@@ -262,6 +265,16 @@ body {
 				display: flex;
 				justify-content: space-around;
 			}
+		}
+	}
+
+	&__pages {
+		margin: 0 auto;
+		color: grey;
+
+		& .change-page {
+			padding: 0.2em 0.5em;
+			cursor: pointer;
 		}
 	}
 }

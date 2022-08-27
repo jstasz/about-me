@@ -228,6 +228,11 @@ body {
 			overflow: hidden;
 			cursor: pointer;
 
+			&--active {
+				border: thin solid black;
+				margin: 2em 0;
+			}
+
 			&-heighscore {
 				& .restaurant__header-average {
 					color: rgb(143, 193, 143);
@@ -287,7 +292,6 @@ body {
 	.leaflet-popup-content-wrapper {
 		background-color: rgb(84, 84, 84);
 		color: rgb(214, 212, 212);
-		font-weight: bold;
 		border-radius: 5px;
 		cursor: pointer;
 	}

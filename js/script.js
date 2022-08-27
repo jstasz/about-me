@@ -19,8 +19,6 @@ const inputPrice = addForm.querySelector(".form__input--price");
 const inputImpress = addForm.querySelector(".form__input--impress");
 const restaurantList = document.querySelector(".restaurants__list");
 
-console.log(findIcon);
-
 class Restaurants {
 	date = new Date();
 	id = (Date.now() + "").slice(-10);
@@ -50,6 +48,7 @@ class App {
 	#mapZoomLevel = 14;
 	#mapEvent;
 	#restaurants = [];
+	// #activeRestaurant;
 
 	constructor() {
 		this._getLocalStorage();
@@ -182,7 +181,7 @@ class App {
 					}-popup`,
 				})
 			)
-			.setPopupContent(`${restaurant.name} ${restaurant.average}`);
+			.setPopupContent(`<b>${restaurant.name}</b> ${restaurant.average}`);
 	}
 
 	_renderRestaurantPopup(restaurant) {
@@ -199,7 +198,7 @@ class App {
 					}-popup`,
 				})
 			)
-			.setPopupContent(`${restaurant.name} ${restaurant.average}`)
+			.setPopupContent(`<b>${restaurant.name}</b> ${restaurant.average}`)
 			.openPopup();
 	}
 
@@ -209,9 +208,7 @@ class App {
 			restaurant.average >= 6 ? "heighscore" : "lowscore"
 		}" data-id="${restaurant.id}">
 			<div class="restaurant__header">
-				<h3 class="restaurant__header-title">${restaurant.name} - ${
-			restaurant.type
-		}</h3>
+				<h3 class="restaurant__header-title">${restaurant.name}</h3>
 				<p class="restaurant__header-average">${restaurant.average >= 7 ? "" : ""} ${
 			restaurant.average
 		}</p>
@@ -233,6 +230,10 @@ class App {
 
 		if (!restaurantListEl) return;
 
+		const listElSibilings = restaurantListEl
+			.closest(".restaurants__list")
+			.querySelectorAll(".restaurant");
+
 		const restaurant = this.#restaurants.find(
 			(rest) => rest.id === restaurantListEl.dataset.id
 		);
@@ -243,6 +244,11 @@ class App {
 			animate: true,
 			pan: { duration: 1 },
 		});
+
+		listElSibilings.forEach((el) => el.classList.remove("restaurant--active"));
+		restaurantListEl.classList.add("restaurant--active");
+
+		console.log(document.querySelector(".restaurant--active"));
 	}
 
 	_setLocalStorage() {

@@ -59,6 +59,7 @@ class App {
 			icon.addEventListener("click", this._startedLayout.bind(this))
 		);
 		findIcon.addEventListener("click", this._showFindForm.bind(this));
+		findSubmitBtn.addEventListener("click", this._findRestaurant.bind(this));
 	}
 
 	_getPosition() {
@@ -112,20 +113,23 @@ class App {
 	}
 
 	_startedLayout() {
-		this._clearForms();
+		this._clearForms(addForm);
+		this._clearForms(findForm);
 		mapBox.style.height = "65%";
 		addBox.style.height = "15%";
 	}
 
-	_clearForms() {
+	_clearForms(form) {
 		icons.classList.remove("hidden");
-		addForm.classList.add("form--hidden");
-		findForm.classList.add("form--hidden");
-		inputName.value = "";
+		form.classList.add("form--hidden");
+		form.classList.add("form--hidden");
+		form.querySelector(".form__input--name").value = "";
 		inputType.value = "cafe";
 
-		//prettier-ignore
-		inputFood.value = inputService.value = inputPrice.value = inputImpress.value = "1";
+		if (form === addForm) {
+			//prettier-ignore
+			form.querySelector(".form__input--type").value = form.querySelector(".form__input--service").value = form.querySelector(".form__input--price").value = form.querySelector(".form__input--impress").value = "1"
+		}
 	}
 
 	_scrolltoList(e) {
@@ -206,7 +210,7 @@ class App {
 		let html = `
 		<li class="restaurant restaurant-${
 			restaurant.average >= 6 ? "heighscore" : "lowscore"
-		}" data-id="${restaurant.id}">
+		}" data-id="${restaurant.id}" data-rname="${restaurant.name}" >
 			<div class="restaurant__header">
 				<h3 class="restaurant__header-title">${restaurant.name}</h3>
 				<p class="restaurant__header-average">${restaurant.average >= 7 ? "" : ""} ${
@@ -247,8 +251,33 @@ class App {
 
 		listElSibilings.forEach((el) => el.classList.remove("restaurant--active"));
 		restaurantListEl.classList.add("restaurant--active");
+	}
 
-		console.log(document.querySelector(".restaurant--active"));
+	_findRestaurant(e) {
+		e.preventDefault();
+
+		const restaurantName = findForm.querySelector(".form__input--name").value;
+
+		const restaurants = restaurantList.querySelectorAll(".restaurant");
+
+		restaurants.forEach((restaurant) =>
+			restaurant.dataset.rname === restaurantName
+				? restaurant.classList.add("restaurant--active")
+				: restaurant.classList.remove("restaurant--active")
+		);
+
+		const restaurant = this.#restaurants.find(
+			(rest) => rest.name === restaurantName
+		);
+
+		this._renderRestaurantPopup(restaurant);
+
+		this.#map.setView(restaurant.coords, this.#mapZoomLevel, {
+			animate: true,
+			pan: { duration: 1 },
+		});
+
+		this._startedLayout();
 	}
 
 	_setLocalStorage() {

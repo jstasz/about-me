@@ -18,6 +18,7 @@ const inputService = addForm.querySelector(".form__input--service");
 const inputPrice = addForm.querySelector(".form__input--price");
 const inputImpress = addForm.querySelector(".form__input--impress");
 const restaurantList = document.querySelector(".restaurants__list");
+const restaurantActiveList = document.querySelector(".restaurants__active");
 
 class Restaurants {
 	date = new Date();
@@ -48,7 +49,7 @@ class App {
 	#mapZoomLevel = 14;
 	#mapEvent;
 	#restaurants = [];
-	// #activeRestaurant;
+	#activeRestaurants = [];
 
 	constructor() {
 		this._getLocalStorage();
@@ -160,15 +161,15 @@ class App {
 
 		this.#restaurants.push(restaurant);
 
+		this._renderRestaurant(restaurant);
+
 		this._renderRestaurantPopup(restaurant);
 
 		this._startedLayout();
 
-		setTimeout(this._scrolltoList, 1500);
-
-		this._renderRestaurant(restaurant);
-
 		this._setLocalStorage();
+
+		setTimeout(this._scrolltoList, 1500);
 	}
 
 	_renderRestaurantMarker(restaurant) {
@@ -261,14 +262,14 @@ class App {
 		const restaurants = restaurantList.querySelectorAll(".restaurant");
 
 		restaurants.forEach((restaurant) =>
-			restaurant.dataset.rname === restaurantName
-				? restaurant.classList.add("restaurant--active")
-				: restaurant.classList.remove("restaurant--active")
+			restaurant.classList.remove("restaurant--active")
 		);
 
 		const restaurant = this.#restaurants.find(
 			(rest) => rest.name === restaurantName
 		);
+
+		this._renderActiveRestaurant(restaurant);
 
 		this._renderRestaurantPopup(restaurant);
 
@@ -278,6 +279,29 @@ class App {
 		});
 
 		this._startedLayout();
+	}
+
+	_renderActiveRestaurant(restaurant) {
+		let html = `
+		<li class="restaurant restaurant-${
+			restaurant.average >= 6 ? "heighscore" : "lowscore"
+		}" data-id="${restaurant.id}" data-rname="${restaurant.name}" >
+			<div class="restaurant__header">
+				<h3 class="restaurant__header-title">${restaurant.name}</h3>
+				<p class="restaurant__header-average">${restaurant.average >= 7 ? "" : ""} ${
+			restaurant.average
+		}</p>
+			</div>
+			<div class="restaurant__scoores">
+				<p class="restaurant__icon--eat">🍔 = ${restaurant.food}</p>
+				<p class="restaurant__icon--service">🍽 = ${restaurant.service}</p>
+				<p class="restaurant__icon--price">💸 = ${restaurant.price}</p>
+				<p class="restaurant__icon--impress">❤️ = ${restaurant.impress}</p>
+			</div>
+		</li>
+		`;
+
+		restaurantActiveList.insertAdjacentHTML("afterbegin", html);
 	}
 
 	_setLocalStorage() {

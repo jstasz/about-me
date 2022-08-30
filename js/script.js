@@ -49,7 +49,6 @@ class App {
 	#mapZoomLevel = 14;
 	#mapEvent;
 	#restaurants = [];
-	#activeRestaurants = [];
 
 	constructor() {
 		this._getLocalStorage();
@@ -159,9 +158,13 @@ class App {
 			impress
 		);
 
+		this._clearActiveRestaurants();
+
 		this.#restaurants.push(restaurant);
 
-		this._renderRestaurant(restaurant);
+		this._renderRestaurant(restaurant, restaurantActiveList);
+
+		this._renderRestaurant(restaurant, restaurantList);
 
 		this._renderRestaurantPopup(restaurant);
 
@@ -207,7 +210,7 @@ class App {
 			.openPopup();
 	}
 
-	_renderRestaurant(restaurant) {
+	_renderRestaurant(restaurant, list) {
 		let html = `
 		<li class="restaurant restaurant-${
 			restaurant.average >= 6 ? "heighscore" : "lowscore"
@@ -227,7 +230,7 @@ class App {
 		</li>
 		`;
 
-		restaurantList.insertAdjacentHTML("afterbegin", html);
+		list.insertAdjacentHTML("beforeend", html);
 	}
 
 	_moveToPopup(e) {
@@ -259,17 +262,13 @@ class App {
 
 		const restaurantName = findForm.querySelector(".form__input--name").value;
 
-		const restaurants = restaurantList.querySelectorAll(".restaurant");
-
-		restaurants.forEach((restaurant) =>
-			restaurant.classList.remove("restaurant--active")
-		);
-
 		const restaurant = this.#restaurants.find(
 			(rest) => rest.name === restaurantName
 		);
 
-		this._renderActiveRestaurant(restaurant);
+		this._clearActiveRestaurants();
+
+		this._renderActiveRestaurant(restaurant, restaurantActiveList);
 
 		this._renderRestaurantPopup(restaurant);
 
@@ -281,27 +280,17 @@ class App {
 		this._startedLayout();
 	}
 
-	_renderActiveRestaurant(restaurant) {
-		let html = `
-		<li class="restaurant restaurant-${
-			restaurant.average >= 6 ? "heighscore" : "lowscore"
-		}" data-id="${restaurant.id}" data-rname="${restaurant.name}" >
-			<div class="restaurant__header">
-				<h3 class="restaurant__header-title">${restaurant.name}</h3>
-				<p class="restaurant__header-average">${restaurant.average >= 7 ? "" : ""} ${
-			restaurant.average
-		}</p>
-			</div>
-			<div class="restaurant__scoores">
-				<p class="restaurant__icon--eat">🍔 = ${restaurant.food}</p>
-				<p class="restaurant__icon--service">🍽 = ${restaurant.service}</p>
-				<p class="restaurant__icon--price">💸 = ${restaurant.price}</p>
-				<p class="restaurant__icon--impress">❤️ = ${restaurant.impress}</p>
-			</div>
-		</li>
-		`;
+	_clearActiveRestaurants() {
+		const restaurants = restaurantList.querySelectorAll(".restaurant");
 
-		restaurantActiveList.insertAdjacentHTML("afterbegin", html);
+		restaurants.forEach((restaurant) =>
+			restaurant.classList.remove("restaurant--active")
+		);
+
+		const activeRestaurants =
+			restaurantActiveList.querySelectorAll(".restaurant");
+
+		activeRestaurants.forEach((el) => el.remove());
 	}
 
 	_setLocalStorage() {
@@ -315,7 +304,7 @@ class App {
 
 		this.#restaurants = data;
 		this.#restaurants.forEach((restaurant) =>
-			this._renderRestaurant(restaurant)
+			this._renderRestaurant(restaurant, restaurantList)
 		);
 	}
 

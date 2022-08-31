@@ -127,6 +127,12 @@ body {
 	&--hidden {
 		display: none;
 	}
+
+	& .no-find {
+		font-style: italic;
+		padding: 0.5em;
+		width: 100%;
+	}
 }
 
 .main {
@@ -230,7 +236,6 @@ body {
 
 			&--active {
 				border: thin solid black;
-				margin: 2em 0;
 			}
 
 			&-heighscore {
@@ -270,6 +275,12 @@ body {
 				display: flex;
 				justify-content: space-around;
 			}
+		}
+	}
+
+	&__active {
+		& .restaurant {
+			border: thin solid black;
 		}
 	}
 

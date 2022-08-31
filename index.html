@@ -132,11 +132,14 @@
 					</form>
 					<form class="form main__forms--find form--hidden">
 						<div class="form__close"><i class="fa-solid fa-xmark"></i></div>
+						<p class="no-find hidden">
+							There is no that restaurant on the list. Find something else.
+						</p>
 						<div class="form__row form__row--name">
 							<input class="form__input form__input--name" placeholder="name" />
 						</div>
 						<div class="form__row form__row--type">
-							<select class="form__input form__input--type">
+							<select class="form__input form__input--type" disabled>
 								<option value="cafe">Cafe</option>
 								<option value="sweets">Sweets</option>
 								<option value="breakfasts">Breakfasts</option>
@@ -152,8 +155,8 @@
 			</section>
 			<section class="box restaurants">
 				<h2 class="title restaurants__title">Restaurants</h2>
-				<ul class="restaurants__active"></ul>
-				<ul class="restaurants__list">
+				<ul class="restaurants__list restaurants__active"></ul>
+				<ul class="restaurants__list restaurants__all">
 					<!--place for restaurants list-->
 				</ul>
 				<!-- <div class="restaurants__pages">

@@ -17,8 +17,9 @@ const inputFood = addForm.querySelector(".form__input--food");
 const inputService = addForm.querySelector(".form__input--service");
 const inputPrice = addForm.querySelector(".form__input--price");
 const inputImpress = addForm.querySelector(".form__input--impress");
-const restaurantList = document.querySelector(".restaurants__list");
+const restaurantList = document.querySelector(".restaurants__all");
 const restaurantActiveList = document.querySelector(".restaurants__active");
+const markers = document.querySelectorAll(".leaflet-marker-icon");
 
 class Restaurants {
 	date = new Date();
@@ -49,6 +50,7 @@ class App {
 	#mapZoomLevel = 14;
 	#mapEvent;
 	#restaurants = [];
+	#marker;
 
 	constructor() {
 		this._getLocalStorage();
@@ -176,7 +178,7 @@ class App {
 	}
 
 	_renderRestaurantMarker(restaurant) {
-		L.marker(restaurant.coords)
+		this.#marker = L.marker(restaurant.coords)
 			.addTo(this.#map)
 			.bindPopup(
 				L.popup({
@@ -238,10 +240,6 @@ class App {
 
 		if (!restaurantListEl) return;
 
-		const listElSibilings = restaurantListEl
-			.closest(".restaurants__list")
-			.querySelectorAll(".restaurant");
-
 		const restaurant = this.#restaurants.find(
 			(rest) => rest.id === restaurantListEl.dataset.id
 		);
@@ -253,7 +251,7 @@ class App {
 			pan: { duration: 1 },
 		});
 
-		listElSibilings.forEach((el) => el.classList.remove("restaurant--active"));
+		this._clearActiveRestaurants();
 		restaurantListEl.classList.add("restaurant--active");
 	}
 
@@ -266,9 +264,15 @@ class App {
 			(rest) => rest.name === restaurantName
 		);
 
+		if (!restaurant) {
+			const alert = document.querySelector(".no-find");
+			findForm.querySelector(".form__input--name").value = "";
+			return alert.classList.remove("hidden");
+		}
+
 		this._clearActiveRestaurants();
 
-		this._renderActiveRestaurant(restaurant, restaurantActiveList);
+		this._renderRestaurant(restaurant, restaurantActiveList);
 
 		this._renderRestaurantPopup(restaurant);
 

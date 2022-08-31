@@ -20,6 +20,7 @@ const inputImpress = addForm.querySelector(".form__input--impress");
 const restaurantList = document.querySelector(".restaurants__all");
 const restaurantActiveList = document.querySelector(".restaurants__active");
 const markers = document.querySelectorAll(".leaflet-marker-icon");
+const nextPage = document.querySelector(".change-page--next");
 
 class Restaurants {
 	date = new Date();
@@ -51,6 +52,7 @@ class App {
 	#mapEvent;
 	#restaurants = [];
 	#marker;
+	#page = 1;
 
 	constructor() {
 		this._getLocalStorage();
@@ -62,7 +64,13 @@ class App {
 		);
 		findIcon.addEventListener("click", this._showFindForm.bind(this));
 		findSubmitBtn.addEventListener("click", this._findRestaurant.bind(this));
+		// nextPage.addEventListener("click", this._changePage.bind(this));
 	}
+
+	// _changePage() {
+	// 	this.#page++;
+	// 	console.log(this.#page);
+	// }
 
 	_getPosition() {
 		if (navigator.geolocation)
@@ -166,7 +174,7 @@ class App {
 
 		this._renderRestaurant(restaurant, restaurantActiveList);
 
-		this._renderRestaurant(restaurant, restaurantList);
+		// this._renderRestaurant(restaurant, restaurantList);
 
 		this._renderRestaurantPopup(restaurant);
 
@@ -307,7 +315,10 @@ class App {
 		if (!data) return;
 
 		this.#restaurants = data;
-		this.#restaurants.forEach((restaurant) =>
+
+		const pagesRest = this._divideSerchResults(1);
+
+		pagesRest.forEach((restaurant) =>
 			this._renderRestaurant(restaurant, restaurantList)
 		);
 	}
@@ -315,6 +326,12 @@ class App {
 	reset() {
 		localStorage.removeItem("restaurants");
 		location.reload();
+	}
+
+	_divideSerchResults(page) {
+		const start = (page - 1) * 5; //0;
+		const end = page * 5;
+		return this.#restaurants.slice(start, end);
 	}
 }
 

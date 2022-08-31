@@ -19,6 +19,7 @@ const inputPrice = addForm.querySelector(".form__input--price");
 const inputImpress = addForm.querySelector(".form__input--impress");
 const restaurantList = document.querySelector(".restaurants__all");
 const restaurantActiveList = document.querySelector(".restaurants__active");
+const restaurantListEl = restaurantList.querySelectorAll("li");
 const markers = document.querySelectorAll(".leaflet-marker-icon");
 const nextPage = document.querySelector(".change-page--next");
 
@@ -64,13 +65,23 @@ class App {
 		);
 		findIcon.addEventListener("click", this._showFindForm.bind(this));
 		findSubmitBtn.addEventListener("click", this._findRestaurant.bind(this));
-		// nextPage.addEventListener("click", this._changePage.bind(this));
+		nextPage.addEventListener("click", this._changePage.bind(this));
 	}
 
-	// _changePage() {
-	// 	this.#page++;
-	// 	console.log(this.#page);
-	// }
+	_changePage() {
+		this.#page++;
+		const renderRestaurants = this._divideSerchResults(this.#page);
+
+		const restaurantListEl = restaurantList.querySelectorAll(".restaurant");
+		restaurantListEl.forEach((el) => el.remove());
+
+		renderRestaurants.forEach((restaurant) =>
+			this._renderRestaurant(restaurant, restaurantList)
+		);
+
+		const pageNumber = document.querySelector(".restaurants__pages--number");
+		pageNumber.textContent = this.#page;
+	}
 
 	_getPosition() {
 		if (navigator.geolocation)
@@ -174,7 +185,8 @@ class App {
 
 		this._renderRestaurant(restaurant, restaurantActiveList);
 
-		// this._renderRestaurant(restaurant, restaurantList);
+		if (this.#restaurants.length < 5)
+			this._renderRestaurant(restaurant, restaurantList);
 
 		this._renderRestaurantPopup(restaurant);
 
@@ -316,9 +328,7 @@ class App {
 
 		this.#restaurants = data;
 
-		const pagesRest = this._divideSerchResults(1);
-
-		pagesRest.forEach((restaurant) =>
+		this._divideSerchResults(1).forEach((restaurant) =>
 			this._renderRestaurant(restaurant, restaurantList)
 		);
 	}
@@ -330,7 +340,8 @@ class App {
 
 	_divideSerchResults(page) {
 		const start = (page - 1) * 5; //0;
-		const end = page * 5;
+		const end = page * 5; // 5
+
 		return this.#restaurants.slice(start, end);
 	}
 }

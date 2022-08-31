@@ -287,6 +287,11 @@ body {
 	&__pages {
 		margin: 0 auto;
 		color: grey;
+		display: flex;
+
+		&--number {
+			padding: 0 1em;
+		}
 
 		& .change-page {
 			padding: 0.2em 0.5em;

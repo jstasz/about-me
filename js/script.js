@@ -21,7 +21,13 @@ const restaurantList = document.querySelector(".restaurants__all");
 const restaurantActiveList = document.querySelector(".restaurants__active");
 const restaurantListEl = restaurantList.querySelectorAll("li");
 const markers = document.querySelectorAll(".leaflet-marker-icon");
-const nextPage = document.querySelector(".change-page--next");
+const nextPage = document.querySelector(".restaurants__pages-change--next");
+const previousPage = document.querySelector(
+	".restaurants__pages-change--previous"
+);
+
+console.log(previousPage);
+console.log(nextPage);
 
 class Restaurants {
 	date = new Date();
@@ -66,10 +72,15 @@ class App {
 		findIcon.addEventListener("click", this._showFindForm.bind(this));
 		findSubmitBtn.addEventListener("click", this._findRestaurant.bind(this));
 		nextPage.addEventListener("click", this._changePage.bind(this));
+		previousPage.addEventListener("click", this._changePage.bind(this));
 	}
 
-	_changePage() {
-		this.#page++;
+	_changePage(e) {
+		const side = e.target.closest(".restaurants__pages-change");
+
+		if (side === nextPage) this.#page++;
+		if (side === previousPage) this.#page--;
+
 		const renderRestaurants = this._divideSerchResults(this.#page);
 
 		const restaurantListEl = restaurantList.querySelectorAll(".restaurant");
@@ -79,7 +90,7 @@ class App {
 			this._renderRestaurant(restaurant, restaurantList)
 		);
 
-		const pageNumber = document.querySelector(".restaurants__pages--number");
+		const pageNumber = document.querySelector(".restaurants__pages-number");
 		pageNumber.textContent = this.#page;
 	}
 

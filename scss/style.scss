@@ -289,11 +289,11 @@ body {
 		color: grey;
 		display: flex;
 
-		&--number {
+		&-number {
 			padding: 0 1em;
 		}
 
-		& .change-page {
+		&-change {
 			padding: 0.2em 0.5em;
 			cursor: pointer;
 		}

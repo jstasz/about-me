@@ -333,7 +333,18 @@ class App {
 		if (!restaurant) {
 			const alert = document.querySelector(".no-find");
 			findForm.querySelector(".form__input--name").value = "";
-			return alert.classList.remove("hidden");
+
+			const showAlert = function () {
+				alert.classList.remove("hidden");
+			};
+
+			showAlert();
+
+			const hideAlert = function () {
+				alert.classList.add("hidden");
+			};
+
+			return setTimeout(hideAlert, 2000);
 		}
 
 		this._clearActiveRestaurants();

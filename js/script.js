@@ -26,9 +26,6 @@ const previousPage = document.querySelector(
 	".restaurants__pages-change--previous"
 );
 
-console.log(previousPage);
-console.log(nextPage);
-
 class Restaurants {
 	date = new Date();
 	id = (Date.now() + "").slice(-10);
@@ -76,13 +73,8 @@ class App {
 		this._generatePagesMarkup();
 	}
 
-	_changePage(e) {
-		const side = e.target.closest(".restaurants__pages-change");
-
-		if (side === nextPage) this.#page++;
-		if (side === previousPage) this.#page--;
-
-		const renderRestaurants = this._divideSerchResults(this.#page);
+	_renderRestaurantsPage(page) {
+		const renderRestaurants = this._divideSerchResults(page);
 
 		const restaurantListEl = restaurantList.querySelectorAll(".restaurant");
 		restaurantListEl.forEach((el) => el.remove());
@@ -90,6 +82,15 @@ class App {
 		renderRestaurants.forEach((restaurant) =>
 			this._renderRestaurant(restaurant, restaurantList)
 		);
+	}
+
+	_changePage(e) {
+		const side = e.target.closest(".restaurants__pages-change");
+
+		if (side === nextPage) this.#page++;
+		if (side === previousPage) this.#page--;
+
+		this._renderRestaurantsPage(this.#page);
 
 		this._generatePagesMarkup();
 	}
@@ -225,6 +226,10 @@ class App {
 
 		if (this.#restaurants.length < 5)
 			this._renderRestaurant(restaurant, restaurantList);
+
+		this.#page = 1;
+		this._renderRestaurantsPage(1);
+		this._generatePagesMarkup();
 
 		this._renderRestaurantPopup(restaurant);
 

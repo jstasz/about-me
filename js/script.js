@@ -19,7 +19,7 @@ const inputPrice = addForm.querySelector(".form__input--price");
 const inputImpress = addForm.querySelector(".form__input--impress");
 const restaurantList = document.querySelector(".restaurants__all");
 const restaurantActiveList = document.querySelector(".restaurants__active");
-const restaurantListEl = restaurantList.querySelectorAll("li");
+const restaurantListEl = restaurantList.querySelectorAll(".restaurant");
 const markers = document.querySelectorAll(".leaflet-marker-icon");
 const nextPage = document.querySelector(".restaurants__pages-change--next");
 const previousPage = document.querySelector(
@@ -73,6 +73,7 @@ class App {
 		findSubmitBtn.addEventListener("click", this._findRestaurant.bind(this));
 		nextPage.addEventListener("click", this._changePage.bind(this));
 		previousPage.addEventListener("click", this._changePage.bind(this));
+		this._generatePagesMarkup();
 	}
 
 	_changePage(e) {
@@ -89,6 +90,32 @@ class App {
 		renderRestaurants.forEach((restaurant) =>
 			this._renderRestaurant(restaurant, restaurantList)
 		);
+
+		this._generatePagesMarkup();
+	}
+
+	_generatePagesMarkup() {
+		const numPages = Math.ceil(this.#restaurants.length / 5);
+
+		if (this.#page === 1 && numPages > 1) {
+			nextPage.classList.remove("hidden");
+			previousPage.classList.add("hidden");
+		}
+
+		if (this.#page === numPages && numPages > 1) {
+			nextPage.classList.add("hidden");
+			previousPage.classList.remove("hidden");
+		}
+
+		if (this.#page < numPages && this.#page > 1) {
+			nextPage.classList.remove("hidden");
+			previousPage.classList.remove("hidden");
+		}
+
+		if (this.#page === 1 && numPages === 1) {
+			nextPage.classList.add("hidden");
+			previousPage.classList.add("hidden");
+		}
 
 		const pageNumber = document.querySelector(".restaurants__pages-number");
 		pageNumber.textContent = this.#page;
@@ -264,6 +291,9 @@ class App {
 		`;
 
 		list.insertAdjacentHTML("beforeend", html);
+
+		if (list === restaurantActiveList)
+			restaurantActiveList.classList.remove("hidden");
 	}
 
 	_moveToPopup(e) {

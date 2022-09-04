@@ -352,10 +352,6 @@ class App {
 
 		this._renderRestaurant(restaurant, restaurantActiveList);
 
-		this.#page = 1;
-		this._renderRestaurantsPage(1);
-		this._generatePagesMarkup();
-
 		this._renderRestaurantPopup(restaurant);
 
 		this.#map.setView(restaurant.coords, this.#mapZoomLevel, {

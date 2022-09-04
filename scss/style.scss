@@ -85,6 +85,12 @@ body {
 		width: 45%;
 	}
 
+	&.main__forms--find {
+		& .form__row--name {
+			width: 100%;
+		}
+	}
+
 	&__row--food,
 	&__row--service,
 	&__row--price,

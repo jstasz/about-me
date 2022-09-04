@@ -1,0 +1,102 @@
+.restaurants {
+	width: 100%;
+	padding: 1em 0;
+	background-image: $color-box;
+	@include flex(flex, column, space-between, "");
+
+	&__title {
+		text-align: center;
+		color: $color-dirtywhite;
+	}
+
+	&__list {
+		padding: 1em;
+		list-style-type: none;
+
+		& .restaurant {
+			position: relative;
+			margin: 0.5em 0;
+			padding: 0.5em;
+			text-align: center;
+			color: $color-dirtywhite;
+			background-color: $color-restaurantitem;
+			border-radius: 5px;
+			overflow: hidden;
+			cursor: pointer;
+
+			&--active {
+				border: thin solid $color-almostblack;
+			}
+
+			&-heighscore {
+				& .restaurant__header-average {
+					color: $color-heighaverage;
+				}
+			}
+
+			&-lowscore {
+				& .restaurant__header-average {
+					color: $color-lowaverage;
+				}
+			}
+
+			&__header {
+				padding: 0.2em;
+				@include flex(flex, row, space-between, center);
+				color: $color-almostblack;
+
+				&-title {
+					margin-right: 0.5em;
+				}
+
+				&-average {
+					font-size: 2rem;
+					font-weight: 700;
+				}
+			}
+
+			&__scoores {
+				width: 100%;
+				padding: 0.2em;
+				@include flex(flex, row, space-around, "");
+				font-size: 1.6rem;
+				font-weight: 600;
+			}
+		}
+	}
+
+	&__active {
+		& .restaurant {
+			border: thin solid $color-almostblack;
+		}
+	}
+
+	&__pages {
+		margin: 0 auto;
+		display: flex;
+		color: $btn-color;
+
+		&-number {
+			padding: 0 1em;
+		}
+
+		&-change {
+			padding: 0.2em 0.5em;
+			cursor: pointer;
+		}
+	}
+}
+
+@media (min-width: 576px) {
+	.restaurants {
+		padding: 1.5em 3em;
+	}
+}
+
+@media (min-width: 768px) {
+	.restaurants {
+		width: 45%;
+		height: calc(90% + 2em);
+		padding: 1.5em 0;
+	}
+}

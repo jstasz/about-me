@@ -1,0 +1,31 @@
+.wrapper {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.hidden {
+	display: none;
+}
+
+.container {
+	width: 100%;
+	@include flex(flex, column, center, center);
+}
+
+.box {
+	margin: 1em;
+	background-image: $color-box;
+	box-shadow: $box-shadow;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+@media (min-width: 768px) {
+	.container {
+		height: 100vh;
+		min-height: 700px;
+		max-height: 800px;
+		flex-direction: row;
+	}
+}

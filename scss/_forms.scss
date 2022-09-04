@@ -1,0 +1,94 @@
+.form {
+	width: 100%;
+	padding: 2em;
+	@include flex(flex, row, space-between, center);
+	flex-wrap: wrap;
+	align-content: center;
+	text-align: center;
+	border-radius: 10px;
+
+	&__close {
+		position: absolute;
+		top: 0;
+		right: 0;
+		margin: 1em;
+		padding: 0.5em;
+		font-size: 1.8rem;
+		color: $btn-color;
+		cursor: pointer;
+	}
+
+	&__row {
+		margin: 0.2em;
+
+		::placeholder {
+			padding-left: 0.2em;
+			color: $color-darkgrey;
+		}
+	}
+
+	&__row--name {
+		width: 100%;
+	}
+
+	&__row--food,
+	&__row--service,
+	&__row--price,
+	&__row--impress {
+		width: 20%;
+	}
+
+	&__label {
+		margin-top: 5em;
+		padding-bottom: 0.2em;
+		font-weight: 600;
+		color: rgb(208, 208, 208);
+	}
+
+	&__input {
+		width: 100%;
+		margin: 0.2em;
+		padding: 0.2em;
+		color: $color-darkgrey;
+		background-color: $color-inputs;
+		border-radius: 5px;
+		border: thin solid $color-almostblack;
+
+		&:focus {
+			outline: none;
+		}
+	}
+
+	&__btn {
+		display: block;
+		right: 0;
+		margin: 1.5em auto 0;
+		padding: 0.4em 0.8em;
+		color: #65c8c8;
+		background-color: $btn-color;
+		border: thin solid $color-almostblack;
+		border-radius: 5px;
+	}
+
+	&--hidden {
+		display: none;
+	}
+
+	& .not-find {
+		width: 100%;
+		padding: 0.5em;
+		font-style: italic;
+	}
+}
+
+@media (min-width: 576px) {
+	.form {
+		padding: 0 5em;
+	}
+}
+
+@media (min-width: 768px) {
+	.form {
+		padding: 2em;
+	}
+}

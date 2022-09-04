@@ -7,7 +7,7 @@ const addForm = document.querySelector(".main__forms--add");
 const closeFormIcon = document.querySelectorAll(".form__close");
 const findIcon = document.querySelector(".activator__form--find");
 const findForm = document.querySelector(".main__forms--find");
-const icons = document.querySelector(".main__forms-icons");
+const formsBox = document.querySelector(".main__forms-box");
 const addSubmitBtn = document.querySelector(".form__btn--add");
 const findSubmitBtn = document.querySelector(".form__btn--find");
 const restaurantsSection = document.querySelector(".restaurants");
@@ -166,7 +166,7 @@ class App {
 	_changeLayout() {
 		mapBox.style.height = "45%";
 		addBox.style.height = "35%";
-		icons.classList.add("hidden");
+		formsBox.classList.add("hidden");
 		inputName.focus();
 	}
 
@@ -178,14 +178,14 @@ class App {
 	}
 
 	_clearForms(form) {
-		icons.classList.remove("hidden");
+		formsBox.classList.remove("hidden");
 		form.classList.add("form--hidden");
 		form.classList.add("form--hidden");
 		form.querySelector(".form__input--name").value = "";
 
 		if (form === addForm) {
 			//prettier-ignore
-			form.querySelector(".form__input--service").value = form.querySelector(".form__input--price").value = form.querySelector(".form__input--impress").value = "1"
+			form.querySelector(".form__input--food").value = form.querySelector(".form__input--service").value = form.querySelector(".form__input--price").value = form.querySelector(".form__input--impress").value = "1"
 		}
 	}
 
@@ -327,7 +327,7 @@ class App {
 		);
 
 		if (!restaurant) {
-			const alert = document.querySelector(".no-find");
+			const alert = document.querySelector(".not-find");
 			findForm.querySelector(".form__input--name").value = "";
 
 			const showAlert = function () {
@@ -355,6 +355,8 @@ class App {
 		});
 
 		this._startedLayout();
+
+		setTimeout(this._scrolltoList, 2000);
 	}
 
 	_clearActiveRestaurants() {

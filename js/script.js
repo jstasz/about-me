@@ -207,6 +207,7 @@ class App {
 		const impress = +inputImpress.value;
 		const { lat, lng } = this.#mapEvent.latlng;
 		let restaurant;
+		const numPages = Math.ceil(this.#restaurants.length / 5);
 
 		restaurant = new Restaurants(
 			[lat, lng],
@@ -224,11 +225,11 @@ class App {
 
 		this._renderRestaurant(restaurant, restaurantActiveList);
 
-		if (this.#restaurants.length < 5)
-			this._renderRestaurant(restaurant, restaurantList);
+		if (restaurantList.childElementCount >= 5 && this.#page === numPages)
+			this._renderRestaurantsPage(this.#page++);
 
-		this.#page = 1;
-		this._renderRestaurantsPage(1);
+		this._renderRestaurantsPage(this.#page);
+
 		this._generatePagesMarkup();
 
 		this._renderRestaurantPopup(restaurant);

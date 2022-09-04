@@ -80,15 +80,8 @@ body {
 		}
 	}
 
-	&__row--name,
-	&__row--type {
-		width: 45%;
-	}
-
-	&.main__forms--find {
-		& .form__row--name {
-			width: 100%;
-		}
+	&__row--name {
+		width: 100%;
 	}
 
 	&__row--food,

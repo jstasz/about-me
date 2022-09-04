@@ -12,7 +12,6 @@ const addSubmitBtn = document.querySelector(".form__btn--add");
 const findSubmitBtn = document.querySelector(".form__btn--find");
 const restaurantsSection = document.querySelector(".restaurants");
 const inputName = addForm.querySelector(".form__input--name");
-const inputType = addForm.querySelector(".form__input--type");
 const inputFood = addForm.querySelector(".form__input--food");
 const inputService = addForm.querySelector(".form__input--service");
 const inputPrice = addForm.querySelector(".form__input--price");
@@ -30,10 +29,9 @@ class Restaurants {
 	date = new Date();
 	id = (Date.now() + "").slice(-10);
 
-	constructor(coords, name, type, food, service, price, impress) {
+	constructor(coords, name, food, service, price, impress) {
 		this.coords = coords;
 		this.name = name;
-		this.type = type;
 		this.food = food;
 		this.service = service;
 		this.price = price;
@@ -184,11 +182,10 @@ class App {
 		form.classList.add("form--hidden");
 		form.classList.add("form--hidden");
 		form.querySelector(".form__input--name").value = "";
-		inputType.value = "cafe";
 
 		if (form === addForm) {
 			//prettier-ignore
-			form.querySelector(".form__input--type").value = form.querySelector(".form__input--service").value = form.querySelector(".form__input--price").value = form.querySelector(".form__input--impress").value = "1"
+			form.querySelector(".form__input--service").value = form.querySelector(".form__input--price").value = form.querySelector(".form__input--impress").value = "1"
 		}
 	}
 
@@ -200,7 +197,6 @@ class App {
 	_newRestaurant(e) {
 		e.preventDefault();
 		const name = inputName.value;
-		const type = inputType.value;
 		const food = +inputFood.value;
 		const service = +inputService.value;
 		const price = +inputPrice.value;
@@ -212,7 +208,6 @@ class App {
 		restaurant = new Restaurants(
 			[lat, lng],
 			name,
-			type,
 			food,
 			service,
 			price,

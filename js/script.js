@@ -108,7 +108,8 @@ class App {
 
 	_newRestaurant(e) {
 		e.preventDefault();
-		const name = inputName.value;
+		const name =
+			inputName.value[0].toUpperCase() + inputName.value.slice(1).toLowerCase();
 		const food = +inputFood.value;
 		const service = +inputService.value;
 		const price = +inputPrice.value;

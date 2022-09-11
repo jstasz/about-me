@@ -55,9 +55,10 @@ class Restaurants {
 
 class App {
 	#map;
-	#mapZoomLevel = 14;
+	#mapZoomLevel = 15;
 	#mapEvent;
 	#restaurants = [];
+	#restaurantsNum = 5;
 	#marker;
 	#page = 1;
 
@@ -109,8 +110,10 @@ class App {
 
 	_newRestaurant(e) {
 		e.preventDefault();
-		const name =
-			inputName.value[0].toUpperCase() + inputName.value.slice(1).toLowerCase();
+		const name = inputName.value
+			? inputName.value[0].toUpperCase() +
+			  inputName.value.slice(1).toLowerCase()
+			: "";
 		const food = +inputFood.value;
 		const service = +inputService.value;
 		const price = +inputPrice.value;
@@ -118,6 +121,11 @@ class App {
 		const { lat, lng } = this.#mapEvent.latlng;
 		let restaurant;
 		const numPages = Math.ceil(this.#restaurants.length / 5);
+
+		if (name === "")
+			return document
+				.querySelector(".form__error-name")
+				.classList.remove("hidden");
 
 		restaurant = new Restaurants(
 			[lat, lng],
@@ -147,7 +155,9 @@ class App {
 
 		this._setLocalStorage();
 
-		setTimeout(this._scrolltoList, 1500);
+		this._scrolltoTop();
+
+		document.querySelector(".form__error-name").classList.add("hidden");
 	}
 
 	_renderRestaurant(restaurant, list) {
@@ -272,7 +282,7 @@ class App {
 				alert.classList.add("hidden");
 			};
 
-			return setTimeout(hideAlert, 2000);
+			return setTimeout(hideAlert, 5000);
 		}
 
 		this._clearActiveRestaurants();
@@ -288,7 +298,7 @@ class App {
 
 		this._startedLayout();
 
-		setTimeout(this._scrolltoList, 2000);
+		this._scrolltoTop();
 	}
 
 	_showAddForm(mapE) {
@@ -357,7 +367,7 @@ class App {
 	}
 
 	_generatePagesMarkup() {
-		const numPages = Math.ceil(this.#restaurants.length / 5);
+		const numPages = Math.ceil(this.#restaurants.length / this.#restaurantsNum);
 
 		if (this.#page === 1 && numPages > 1) {
 			nextPage.classList.remove("hidden");
@@ -383,9 +393,9 @@ class App {
 		pageNumber.textContent = numPages === 0 ? "" : this.#page;
 	}
 
-	_scrolltoList(e) {
+	_scrolltoTop(e) {
 		const listTop = restaurantsSection.offsetTop;
-		window.scrollTo(0, listTop - 10);
+		window.scrollTo(0, 0);
 	}
 
 	_setLocalStorage() {

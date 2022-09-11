@@ -163,7 +163,7 @@ class App {
 	_renderRestaurant(restaurant, list) {
 		let html = `
 		<li class="restaurant restaurant-${
-			restaurant.average >= 6 ? "heighscore" : "lowscore"
+			restaurant.average >= 7 ? "heighscore" : "lowscore"
 		}" data-id="${restaurant.id}" data-rname="${restaurant.name}" >
 			<div class="restaurant__header">
 				<h3 class="restaurant__header-title">${restaurant.name}</h3>

@@ -62,6 +62,7 @@ class App {
 	#page = 1;
 
 	constructor() {
+		// this.reset();
 		this._getLocalStorage();
 		this._getPosition();
 		this._generatePagesMarkup();
@@ -373,13 +374,13 @@ class App {
 			previousPage.classList.remove("hidden");
 		}
 
-		if (this.#page === 1 && numPages === 1) {
+		if (this.#page === 1 && numPages <= 1) {
 			nextPage.classList.add("hidden");
 			previousPage.classList.add("hidden");
 		}
 
 		const pageNumber = document.querySelector(".restaurants__pages-number");
-		pageNumber.textContent = this.#page;
+		pageNumber.textContent = numPages === 0 ? "" : this.#page;
 	}
 
 	_scrolltoList(e) {

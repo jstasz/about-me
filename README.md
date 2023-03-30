@@ -16,7 +16,7 @@ To add a restaurant, you need to select a location on the map. This will activat
 
 All restaurants added by the user are rendered on the list. The user can select a place of interest to display it on the map. They can also search for a restaurant by name. Places are stored in local storage for easy retrieval and browsing at any time.
 
-### Map
+#### Map
 
 The application uses a Leaflet map (https://leafletjs.com/) that displays where the user is currently located. Restaurants that the user has added will be marked on the map. To view details about a restaurant, click on the marker on the map.
 
